@@ -89,7 +89,6 @@ def history():
     DELETE:
         Deletes details of all previous requests to the API
     """
-
     args = request.args.to_dict()
     number = args.get("number", 5)
     if request.method == "GET":
@@ -103,6 +102,19 @@ def history():
     if request.method == "DELETE":
         clear_history()
         return {"status": "History cleared"}
+
+
+@app.route("/current_age", methods=["GET"])
+def current_age():
+    """Returns a current age in years based on a given birthdate."""
+    args = request.args.to_dict()
+    date = args.get("date")
+    if date is None:
+        return {"error": "Date parameter is required."}, 400
+    if not is_datetime_string(date, "%d.%m.%Y"):
+        return {"error": "Value for data parameter is invalid."}, 400
+
+    return {"current_age": current_age}
 
 
 if __name__ == "__main__":
