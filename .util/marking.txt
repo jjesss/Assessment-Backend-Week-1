@@ -7,14 +7,12 @@ days_api/test_api.py ..........................................FFFFFFFFF [ 45%]
 FFFFFFFFFFFFFFFFFFFFFF                                                   [ 65%]
 days_api/test_date_functions.py ...................................FFFF  [100%]
 
-======================== 35 failed, 77 passed in 0.34s =========================
+======================== 35 failed, 77 passed in 0.30s =========================
 ************* Module app
-days_api/app.py:45:0: C0301: Line too long (125/100) (line-too-long)
-days_api/app.py:66:4: W0621: Redefining name 'date' from outer scope (line 5) (redefined-outer-name)
 days_api/app.py:5:0: W0611: Unused date imported from datetime (unused-import)
 days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
 days_api/app.py:9:0: W0611: Unused get_current_age imported from date_functions (unused-import)
 
 -----------------------------------
-Your code has been rated at 9.29/10
+Your code has been rated at 9.57/10
 
