@@ -27,7 +27,7 @@ def find_history(number: int):
     """Returns details on the last `number` of requests"""
     found = []
     lowest = min(len(app_history), number)
-    for i in range(lowest):
+    for i in range(lowest-1, -1, -1):
         found.append(app_history[i])
     return found
 
@@ -44,7 +44,7 @@ def index():
 
 
 @app.route("/between", methods=["POST"])
-def date_difference():
+def between():
     """Returns the number of days between two dates"""
     # validate
     if "first" not in request.json or "last" not in request.json:
@@ -63,7 +63,7 @@ def date_difference():
 
 
 @app.route("/weekday", methods=["POST"])
-def get_day_of_week():
+def weekday():
     """Returns the day of the week a specific date is"""
     # validate
     if "date" not in request.json:
