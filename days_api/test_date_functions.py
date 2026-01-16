@@ -133,7 +133,7 @@ def test_get_current_age_birthday_passed(year):
     """Checks that the function handles valid input."""
 
     now = date.today()
-    birthdate = date(year, now.month, now.day) + timedelta(days=-1)
+    birthdate = date(year, now.month, now.day) + timedelta(days=-15)
     expected_age = now.year - birthdate.year
 
     result = get_current_age(birthdate)

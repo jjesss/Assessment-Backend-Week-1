@@ -24,18 +24,11 @@ def add_to_history(current_request):
 
 
 def find_history(number: int):
-    """Returns a number of last request"""
+    """Returns details on the last `number` of requests"""
     found = []
-    if app_history == []:
-        return found
-    prev_method = app_history[-1]["method"]
-
-    prev_route = app_history[-1]["route"]
-    for app in app_history:
-        if prev_method == app["method"] and prev_route == app["route"]:
-            found.append(app)
-        if len(found) == number:
-            return found
+    lowest = min(len(app_history), number)
+    for i in range(lowest):
+        found.append(app_history[i])
     return found
 
 
@@ -86,20 +79,30 @@ def get_day_of_week():
     return jsonify({"weekday": weekday})
 
 
-@app.route("/history", methods=["GET"])
-def get_history():
-    """Returns details on the last `number` of requests to the API
-    check if method and route are the same
-    query parameter number"""
+@app.route("/history", methods=["GET", "DELETE"])
+def history():
+    """
+    GET:
+        Returns details on the last `number` of requests to the API
+        check if method and route are the same
+        query parameter number
+    DELETE:
+        Deletes details of all previous requests to the API
+    """
 
     args = request.args.to_dict()
     number = args.get("number", 5)
-    if not isinstance(number, int):
-        return {"error": "Number must be an integer between 1 and 20."}, 400
-    if int(number) < 1 or int(number) > 20:
-        return {"error": "Number must be an integer between 1 and 20."}, 400
-
-    return find_history(number)
+    if request.method == "GET":
+        try:
+            if int(number) < 1 or int(number) > 20:
+                return {"error": "Number must be an integer between 1 and 20."}, 400
+        except ValueError:
+            return {"error": "Number must be an integer between 1 and 20."}, 400
+        add_to_history(request)
+        return find_history(int(number))
+    if request.method == "DELETE":
+        clear_history()
+        return {"status": "History cleared"}
 
 
 if __name__ == "__main__":
