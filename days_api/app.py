@@ -37,18 +37,36 @@ def index():
 @app.route("/between", methods=["POST"])
 def date_difference():
     """Returns the number of days between two dates"""
-    print(request.json)
+    # validate
     if "first" not in request.json or "last" not in request.json:
         return {"error": "Missing required data."}, 400
     if not isinstance(request.json["first"], str) or not isinstance(request.json["last"], str):
         return {"error": "Unable to convert value to datetime."}, 400
     if not is_datetime_string(request.json["first"], "%d.%m.%Y") or not is_datetime_string(request.json["last"], "%d.%m.%Y"):
         return {"error": "Unable to convert value to datetime."}, 400
+
     first = convert_to_datetime(request.json["first"])
     last = convert_to_datetime(request.json["last"])
     days = get_days_between(first, last)
     add_to_history(request)
     return jsonify({"days": days})
+
+
+@app.route("/weekday", methods=["POST"])
+def get_day_of_week():
+    """Returns the day of the week a specific date is"""
+    # validate
+    if "date" not in request.json:
+        return {"error": "Missing required data."}, 400
+    if not isinstance(request.json["date"], str):
+        return {"error": "Unable to convert value to datetime."}, 400
+    if not is_datetime_string(request.json["date"], "%d.%m.%Y"):
+        return {"error": "Unable to convert value to datetime."}, 400
+
+    date = convert_to_datetime(request.json["date"])
+    weekday = get_day_of_week_on(date)
+    add_to_history(request)
+    return jsonify({"weekday": weekday})
 
 
 if __name__ == "__main__":
