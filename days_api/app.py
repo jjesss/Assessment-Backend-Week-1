@@ -2,7 +2,7 @@
 
 # pylint: disable = no-name-in-module
 
-from datetime import datetime, date
+from datetime import datetime
 
 from flask import Flask, Response, request, jsonify
 
@@ -74,9 +74,9 @@ def weekday():
         return {"error": "Unable to convert value to datetime."}, 400
 
     chosen_date = convert_to_datetime(request.json["date"])
-    weekday = get_day_of_week_on(chosen_date)
+    day = get_day_of_week_on(chosen_date)
     add_to_history(request)
-    return jsonify({"weekday": weekday})
+    return jsonify({"weekday": day})
 
 
 @app.route("/history", methods=["GET", "DELETE"])
@@ -102,20 +102,21 @@ def history():
     if request.method == "DELETE":
         clear_history()
         return {"status": "History cleared"}
+    return {"error": "GET or DELETE methods only"}, 400
 
 
 @app.route("/current_age", methods=["GET"])
 def current_age():
     """Returns a current age in years based on a given birthdate."""
     args = request.args.to_dict()
-    date = args.get("date")
-    if date is None:
+    of_date = args.get("date")
+    if of_date is None:
         return {"error": "Date parameter is required."}, 400
-    if not is_datetime_string(date, "%Y-%m-%d"):
+    if not is_datetime_string(of_date, "%Y-%m-%d"):
         return {"error": "Value for data parameter is invalid."}, 400
-    current_age = get_current_age(date)
+    age = get_current_age(of_date)
     print("hi")
-    return {"current_age": current_age}
+    return {"current_age": age}
 
 
 if __name__ == "__main__":
