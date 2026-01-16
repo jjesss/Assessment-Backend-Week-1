@@ -3,18 +3,18 @@ platform linux -- Python 3.12.12, pytest-9.0.2, pluggy-1.6.0
 rootdir: /home/runner/work/Assessment-Backend-Week-1/Assessment-Backend-Week-1
 collected 112 items
 
-days_api/test_api.py .....................FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 45%]
+days_api/test_api.py ..........................................FFFFFFFFF [ 45%]
 FFFFFFFFFFFFFFFFFFFFFF                                                   [ 65%]
 days_api/test_date_functions.py ...................................FFFF  [100%]
 
-======================== 56 failed, 56 passed in 0.29s =========================
+======================== 35 failed, 77 passed in 0.34s =========================
 ************* Module app
 days_api/app.py:45:0: C0301: Line too long (125/100) (line-too-long)
+days_api/app.py:66:4: W0621: Redefining name 'date' from outer scope (line 5) (redefined-outer-name)
 days_api/app.py:5:0: W0611: Unused date imported from datetime (unused-import)
 days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
-days_api/app.py:9:0: W0611: Unused get_day_of_week_on imported from date_functions (unused-import)
 days_api/app.py:9:0: W0611: Unused get_current_age imported from date_functions (unused-import)
 
 -----------------------------------
-Your code has been rated at 9.17/10
+Your code has been rated at 9.29/10
 
