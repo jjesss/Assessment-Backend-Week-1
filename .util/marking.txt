@@ -5,17 +5,16 @@ collected 112 items
 
 days_api/test_api.py ................................................FFF [ 45%]
 FFFFFFFFFFFFFFFFFFFFFF                                                   [ 65%]
-days_api/test_date_functions.py ...................................FFFF  [100%]
+days_api/test_date_functions.py .......................................  [100%]
 
-======================== 29 failed, 83 passed in 0.42s =========================
+======================== 25 failed, 87 passed in 0.31s =========================
 ************* Module app
-days_api/app.py:31:8: W0621: Redefining name 'app' from outer scope (line 14) (redefined-outer-name)
-days_api/app.py:87:0: E0102: function already defined line 26 (function-redefined)
-days_api/app.py:99:11: E1121: Too many positional arguments for function call (too-many-function-args)
+days_api/app.py:34:8: W0621: Redefining name 'app' from outer scope (line 14) (redefined-outer-name)
+days_api/app.py:29:7: C1803: "app_history == []" can be simplified to "not app_history", if it is strictly a sequence, as an empty list is falsey (use-implicit-booleaness-not-comparison)
 days_api/app.py:5:0: W0611: Unused date imported from datetime (unused-import)
 days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
 days_api/app.py:9:0: W0611: Unused get_current_age imported from date_functions (unused-import)
 
 -----------------------------------
-Your code has been rated at 8.41/10
+Your code has been rated at 9.44/10
 
