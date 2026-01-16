@@ -23,6 +23,19 @@ def add_to_history(current_request):
     })
 
 
+def get_history(number: int):
+    """Returns a number of last request"""
+    found = []
+    prev_method = app_history[-1]["method"]
+    prev_route = app_history[-1]["route"]
+    for app in app_history:
+        if prev_method == app["method"] and prev_route == app["route"]:
+            found.append(app)
+        if len(found) == number:
+            return found
+    return found
+
+
 def clear_history():
     """Clears the app history."""
     app_history.clear()
@@ -68,6 +81,22 @@ def get_day_of_week():
     weekday = get_day_of_week_on(chosen_date)
     add_to_history(request)
     return jsonify({"weekday": weekday})
+
+
+@app.route("/history", methods=["GET"])
+def get_history():
+    """Returns details on the last `number` of requests to the API
+    check if method and route are the same
+    query parameter number"""
+
+    args = request.args.to_dict()
+    number = args.get("number", 5)
+    if not number.isdigit():
+        return {"error": "Number must be an integer between 1 and 20."}, 400
+    if int(number) < 1 or int(number) > 20:
+        return {"error": "Number must be an integer between 1 and 20."}, 400
+
+    return get_history(number)
 
 
 if __name__ == "__main__":
