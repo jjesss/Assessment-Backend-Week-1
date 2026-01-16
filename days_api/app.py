@@ -23,10 +23,13 @@ def add_to_history(current_request):
     })
 
 
-def get_history(number: int):
+def find_history(number: int):
     """Returns a number of last request"""
     found = []
+    if app_history == []:
+        return found
     prev_method = app_history[-1]["method"]
+
     prev_route = app_history[-1]["route"]
     for app in app_history:
         if prev_method == app["method"] and prev_route == app["route"]:
@@ -91,12 +94,12 @@ def get_history():
 
     args = request.args.to_dict()
     number = args.get("number", 5)
-    if not number.isdigit():
+    if not isinstance(number, int):
         return {"error": "Number must be an integer between 1 and 20."}, 400
     if int(number) < 1 or int(number) > 20:
         return {"error": "Number must be an integer between 1 and 20."}, 400
 
-    return get_history(number)
+    return find_history(number)
 
 
 if __name__ == "__main__":

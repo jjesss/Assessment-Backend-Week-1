@@ -33,9 +33,12 @@ def test_convert_to_datetime_rejects_bad_input(inp):
 
 
 @pytest.mark.parametrize("first, last, out", ((datetime(2023, 1, 1), datetime(2024, 1, 1), 365),
-                                              (datetime(2023, 1, 1), datetime(2023, 1, 2), 1),
-                                              (datetime(2023, 1, 1), datetime(2023, 2, 1), 31),
-                                              (datetime(2023, 2, 1), datetime(2023, 3, 1), 28),
+                                              (datetime(2023, 1, 1),
+                                               datetime(2023, 1, 2), 1),
+                                              (datetime(2023, 1, 1),
+                                               datetime(2023, 2, 1), 31),
+                                              (datetime(2023, 2, 1),
+                                               datetime(2023, 3, 1), 28),
                                               (datetime(2024, 2, 1), datetime(2024, 3, 1), 29)))
 def test_get_days_between(first, last, out):
     """Checks that the function handles valid input."""
@@ -47,7 +50,8 @@ def test_get_days_between(first, last, out):
 
 @pytest.mark.parametrize("first, last", ((datetime(2023, 1, 1), None),
                                          ("", datetime(2023, 1, 2)),
-                                         ("(datetime(2023, 1, 1)", datetime(2023, 2, 1)),
+                                         ("(datetime(2023, 1, 1)",
+                                          datetime(2023, 2, 1)),
                                          (37, datetime(2023, 3, 1)),
                                          (datetime(2024, 2, 1), datetime)))
 def test_get_days_between_invalid_input(first, last):
@@ -114,7 +118,7 @@ def test_get_current_age_today():
 def test_get_current_age_birthday_not_passed(year):
     """Checks that the function handles valid input."""
 
-    now = date.today() 
+    now = date.today()
     birthdate = date(year, now.month, now.day) + timedelta(days=1)
     expected_age = now.year - birthdate.year - 1
 
@@ -128,8 +132,8 @@ def test_get_current_age_birthday_not_passed(year):
 def test_get_current_age_birthday_passed(year):
     """Checks that the function handles valid input."""
 
-    now = date.today() 
-    birthdate = date(year, now.month, now.day) + timedelta(days=-30)
+    now = date.today()
+    birthdate = date(year, now.month, now.day) + timedelta(days=-1)
     expected_age = now.year - birthdate.year
 
     result = get_current_age(birthdate)

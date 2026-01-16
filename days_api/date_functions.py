@@ -40,15 +40,13 @@ def get_current_age(birthdate: date) -> int:
     """Gets the current age based on birthdate"""
     try:
         # convert string to datetime
-        age = datetime.now().year - birthdate.year
-        if age != 0:
-            age -= 1
+        today = date.today()
+        age = today.year - birthdate.year
         # if the birthday has passed this year then add 1
-        if ((datetime.now().month, datetime.now().day)
-            > (birthdate.month,
+        if ((today.month, today.day)
+            < (birthdate.month,
                birthdate.day)):
-            age += 1
-
+            age -= 1
         return age
     except Exception as err:
         raise TypeError("Date required.") from err
