@@ -3,18 +3,17 @@ platform linux -- Python 3.12.12, pytest-9.0.2, pluggy-1.6.0
 rootdir: /home/runner/work/Assessment-Backend-Week-1/Assessment-Backend-Week-1
 collected 112 items
 
-days_api/test_api.py ................................................FFF [ 45%]
-FFFFFFFFFFFFFFFFFFFFFF                                                   [ 65%]
+days_api/test_api.py ................................................... [ 45%]
+.....FFF..FFFFFFFFFFFF                                                   [ 65%]
 days_api/test_date_functions.py .......................................  [100%]
 
-======================== 25 failed, 87 passed in 0.31s =========================
+======================== 15 failed, 97 passed in 0.28s =========================
 ************* Module app
-days_api/app.py:34:8: W0621: Redefining name 'app' from outer scope (line 14) (redefined-outer-name)
-days_api/app.py:29:7: C1803: "app_history == []" can be simplified to "not app_history", if it is strictly a sequence, as an empty list is falsey (use-implicit-booleaness-not-comparison)
+days_api/app.py:83:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
 days_api/app.py:5:0: W0611: Unused date imported from datetime (unused-import)
 days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
 days_api/app.py:9:0: W0611: Unused get_current_age imported from date_functions (unused-import)
 
 -----------------------------------
-Your code has been rated at 9.44/10
+Your code has been rated at 9.55/10
 
