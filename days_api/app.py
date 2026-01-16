@@ -111,9 +111,10 @@ def current_age():
     date = args.get("date")
     if date is None:
         return {"error": "Date parameter is required."}, 400
-    if not is_datetime_string(date, "%d.%m.%Y"):
+    if not is_datetime_string(date, "%Y-%m-%d"):
         return {"error": "Value for data parameter is invalid."}, 400
-
+    current_age = get_current_age(date)
+    print("hi")
     return {"current_age": current_age}
 
 

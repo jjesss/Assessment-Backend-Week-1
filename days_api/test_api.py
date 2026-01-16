@@ -304,7 +304,8 @@ class TestHistory:
     def test_history_tracks_between(self, test_app):
         """Checks that the between route adds to the history"""
 
-        test_app.post("/between", json={"first": "12.1.2000", "last": "14.1.2000"})
+        test_app.post(
+            "/between", json={"first": "12.1.2000", "last": "14.1.2000"})
 
         result = test_app.get("/history")
         data = result.json
@@ -363,7 +364,7 @@ class TestCurrentAge:
 
         assert result.status_code == 400
         assert result.json == {
-                "error": "Date parameter is required."
+            "error": "Date parameter is required."
         }
 
     @pytest.mark.parametrize("birthdate", ('birthdate', 0, '23/01/2000', '19-02-02', '3rd of March 1827'))
@@ -383,8 +384,7 @@ class TestCurrentAge:
         """Checks that valid date values call appropriate functions and return expected result."""
 
         fake_get_current_age.return_value = 0
-    
-        print(birthdate)
+
         result = test_app.get(f"/current_age?date={birthdate}")
 
         assert result.status_code == 200
