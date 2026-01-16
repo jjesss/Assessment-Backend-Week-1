@@ -3,6 +3,15 @@
 from datetime import datetime, date
 
 
+def is_datetime_string(value: str, fmt: str) -> bool:
+    """Return bool of if str is of datetime format"""
+    try:
+        datetime.strptime(value, fmt)
+        return True
+    except ValueError:
+        return False
+
+
 def convert_to_datetime(date_val: str) -> datetime:
     """Converts date_val to datetime"""
     try:
